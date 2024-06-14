@@ -3,8 +3,11 @@ class Conexion
 {
     public static function conectar()
     {
-        $con = mysqli_init();
-        mysqli_ssl_set($con,NULL,NULL, "SSL/DigiCertGlobalRootCA.crt.pem", NULL, NULL);
-        mysqli_real_connect($con, "papeleriadb.mysql.database.azure.com", "administrador", "LN123456*", "db_papeleria", 3306, MYSQLI_CLIENT_SSL);
+           $options = array(
+    PDO::MYSQL_ATTR_SSL_CA => '/SSL/DigiCertGlobalRootCA.crt.pem'
+    );
+    $db = new PDO('mysql:host=papeleriadb.mysql.database.azure.com;port=3306;dbname=db_papeleria', 'administrador', 'LN123456*', $options);
     }
+
+
 }
