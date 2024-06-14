@@ -3,16 +3,8 @@ class Conexion
 {
     public static function conectar()
     {
-        try {
-            $link = new PDO(
-                "mysql:host=localhost;dbname=db_papeleria",
-                "root",
-                ""
-            );
-            $link->exec("set names utf8");
-            return $link;
-        } catch (\Throwable $th) {
-            die("Error en la conexion: " . $th->getMessage());
-        }
+        $con = mysqli_init();
+        mysqli_ssl_set($con,NULL,NULL, "SSL/DigiCertGlobalRootCA.crt", NULL, NULL);
+        mysqli_real_connect($conn, "papeleriadb.mysql.database.azure.com", "administrador", "LN123456*", "db_papeleria", 3306, MYSQLI_CLIENT_SSL);
     }
 }
